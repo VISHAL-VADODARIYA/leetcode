@@ -4,28 +4,19 @@
  * @return {boolean}
  */
 var containsNearbyDuplicate = function (nums, k) {
-    if (nums.length > 2) {
-        let temp = [];
-        for (let i = 0; i < nums.length; i++) {
-            if (k == nums[i]) {
-                temp.push(i)
+    let first = 0 
+    let dummy = []
+    for (let i = 0 ; i<nums.length ; i++){
+        for(let j = i+1; j<nums.length ; j++){
+            if(nums[i] == nums[j]){
+                dummy.push(nums[i])
+               if(j-i > k){
+                   first = first + 1 
+               }
             }
         }
-        temp = temp.sort((a, b) => { return b - a })
-        console.log(temp)
-        let dummy;
-        dummy = temp[0]
-        for (let j = 1; j < temp.length; j++) {
-            dummy = dummy - temp[j]
-        }
-        if (temp.length > 1) {
-            if (dummy <= k) { return true }
-            else return false
-        }
-        else if (temp.length == 0 ){return false}
-
-        else return true
     }
-    else if(nums.length == 2 ){ if(nums[0] == nums[1]){return true} else return false}
-    else return false
+    if(dummy.length == first)return false
+    else return true
+    
 };
